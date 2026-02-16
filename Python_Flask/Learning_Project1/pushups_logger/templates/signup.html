@@ -1,5 +1,47 @@
 {%extends "base.html"%}
 
 {% block content %}
+
+
 <h1>Welcome to the signup page</h1>
+<!-- form code start -->
+<style>
+.form-container{
+    padding-left:120px;
+    padding-right: 240px;
+}
+
+</style>
+<body>
+ <div class="form-container" >
+ <form method="post" action="/signup">
+  <div class="mb-3">
+    <label for="name" class="form-label">User Name</label>
+    <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp">
+    <div id="nameHelp" class="form-text">Your name goes here.</div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        
+        <div class="mb-3">
+            <label for="confirm_pass" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_pass" name="confirm_pass">
+        </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="checkbox" id="checkbox" name="checkbox">
+    <label class="form-check-label" for="checkbox">I agree to the terms and policies.</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+ </div>
+<!-- form code end -->
+ </body>
+
 {% endblock %}
