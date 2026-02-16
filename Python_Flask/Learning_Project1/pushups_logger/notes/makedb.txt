@@ -1,0 +1,10 @@
+these commands were run on windows to make the db.sqlite
+
+PS C:\Users\Dell\Desktop\PythonAllDisciplines\Python_Flask\Learning_Project1> flask --app pushups_logger:create_app shell
+Ctrl click to launch VS Code Native REPL
+Python 3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)] on win32
+App: pushups_logger
+Instance: C:\Users\Dell\Desktop\PythonAllDisciplines\Python_Flask\Learning_Project1\instance     
+>>> from pushups_logger import db
+>>> db.create_all()
+>>> 
