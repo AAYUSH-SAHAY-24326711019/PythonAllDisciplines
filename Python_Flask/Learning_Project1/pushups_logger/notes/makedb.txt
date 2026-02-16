@@ -8,3 +8,20 @@ Instance: C:\Users\Dell\Desktop\PythonAllDisciplines\Python_Flask\Learning_Proje
 >>> from pushups_logger import db
 >>> db.create_all()
 >>> 
+
+
+How to see the records inside the sqlite
+
+(base) C:\Users\Dell\Desktop\PythonAllDisciplines\Python_Flask\Learning_Project1\pushups_logger>sqlite3 db.sqlite
+SQLite version 3.45.3 2024-04-15 13:34:05 (UTF-16 console I/O)
+Enter ".help" for usage hints.
+sqlite> tables
+   ...> ;
+Parse error: near "tables": syntax error
+  tables ;
+  ^--- error here
+sqlite> .tables
+user
+sqlite> select * from user
+   ...> ;
+1|abc@gmail.com|pbkdf2:sha256:1000000$mqTnNQKu6rDrmPaD$8d82d06b02b8101dec60ff0a723dad4c9c2e521fb6d1c65dc3350c134e3c9e12|abc
