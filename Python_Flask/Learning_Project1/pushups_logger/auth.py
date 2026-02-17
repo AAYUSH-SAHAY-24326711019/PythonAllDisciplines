@@ -1,12 +1,13 @@
 from flask import Blueprint, render_template,url_for,request,redirect
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 from .models import User
+from flask_login import login_user,logout_user,login_required
 from . import db
 
 
 
 auth = Blueprint('auth',__name__)
-
+#--------------------------------------Signup Code Begins -------------------------------------------
 @auth.route('/signup')
 def signup():
     return render_template('signup.html')
@@ -20,13 +21,16 @@ def signup_post():
 
     user = User.query.filter_by(email=email).first()
     if user:
-        print("User already exists!")
+        print("User already exists...")
+        return redirect(url_for('auth.signup'))
     else:
         new_user = User(email=email,name=name,password=generate_password_hash(password,method='pbkdf2:sha256'))
         db.session.add(new_user)
         db.session.commit()
     return redirect(url_for('auth.login'))
+#--------------------------------------Signup Code Ends -------------------------------------------
 
+#--------------------------------------login Code Begins -------------------------------------------
 @auth.route('/login')
 def login():
     return render_template('login.html')
@@ -36,9 +40,23 @@ def login_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
-    print(email,name,password)
+    # print(email,name,password)
+    remember = True if request.form.get('remember') else False
+
+    # check user exist
+    user = User.query.filter_by(email=email).first()
+    if not user or not check_password_hash(user.password,password):
+        return redirect('auth.login')
+    
+    login_user(user,remember=remember)
     return redirect(url_for('main.profile'))
 
+#--------------------------------------login Code Ends -------------------------------------------
+#--------------------------------------Logout Code Starts -------------------------------------------
 @auth.route('/logout')
+@login_required
 def logout():
-    return render_template('logout.html')
+    # return render_template('logout.html')
+    logout_user()
+    return redirect('main.index')
+#--------------------------------------Logout Code Starts -------------------------------------------
