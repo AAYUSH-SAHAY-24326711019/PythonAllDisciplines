@@ -1,0 +1,50 @@
+{%extends "base.html"%}
+
+<head>
+
+    <title>Adding Workouts</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+ <style>
+.form-container form{
+    padding-left:120px;
+    padding-right: 240px;
+}
+</style>
+
+{% block content %}
+<body>
+<div class="form-container">
+<div class="col col-md4 col-md-offset-4">
+    <form
+    method="post"
+    action="{{url_for('main.update_workout', workout_id=workout.id)}}"
+    >
+    <h2>Update Workout</h2>
+    {%with messages = get_flashed_messages()%} {%if messages%}
+    <div class="notification notification is-danger">
+        {{messages[0]}}
+    </div>
+    {%endif%} {%endwith%}
+
+    <div class="form-group">
+        <label for="pushup">Push ups</label>
+        <input type="number" class="form-control" id="pushups" name="pushups" aria-describedby="pushupHelp"
+        placeholder="Enter number of pushups done">
+        
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <input type="text" class="form-control" id="comment" name="comment" aria-describedby="pushupHelp"
+        placeholder="Any comments">
+    </div>
+    <button type="submit" class="btn btn-primary">Update Workout</button>
+</form>
+</div>
+</div>
+</body>
+{% endblock %}
