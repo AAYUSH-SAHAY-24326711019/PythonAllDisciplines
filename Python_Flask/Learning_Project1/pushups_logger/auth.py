@@ -58,5 +58,5 @@ def login_post():
 def logout():
     # return render_template('logout.html')
     logout_user()
-    return redirect('main.index')
+    return redirect(url_for('main.index'))
 #--------------------------------------Logout Code Starts -------------------------------------------

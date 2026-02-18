@@ -1,0 +1,4 @@
+always add the the css in the base.html once
+and the cdn for the js in the end of the body,
+
+in the child templates redundant linking of bootstrap and js be avoided.
