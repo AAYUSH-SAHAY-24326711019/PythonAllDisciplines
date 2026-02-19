@@ -70,6 +70,7 @@ def delete_workout(workout_id):
     workout = Workout.query.get_or_404(workout_id)
     db.session.delete(workout)
     db.session.commit()
+    flash('Your workout has been deleted ...')
     return redirect(url_for('main.user_workouts'))
 
 
