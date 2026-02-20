@@ -1,0 +1,8 @@
+django-admin start project myproject
+
+python manage.py startapp <myapp >(create multiple apps)
+
+*inside the single django projects there can be many apps
+
+to run the django server on the local machine:
+python manage.py runserver
