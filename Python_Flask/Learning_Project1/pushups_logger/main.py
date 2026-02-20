@@ -1,8 +1,9 @@
 from . import db
 from .models import User
 from .models import Workout
-from flask import Blueprint, flash, render_template,url_for,request,redirect
+from flask import Blueprint, flash, jsonify, render_template,url_for,request,redirect
 from flask_login import login_required, current_user
+from sqlalchemy import asc
 
 main = Blueprint('main',__name__)
 
@@ -78,3 +79,23 @@ def delete_workout(workout_id):
 # --------------delete the record end --------------------------
 
 # -------------------profile page code Ends-----------------------
+
+#------------Graphs of the pushups start---------------------
+@main.route("/workoutChart")
+@login_required
+def workout_data():
+    workouts = Workout.query \
+        .filter_by(author=current_user) \
+        .order_by(asc(Workout.date_posted)) \
+        .all()
+
+    data = [
+        {
+            "date": w.date_posted.strftime("%Y-%m-%d"),
+            "pushups": w.pushups
+        }
+        for w in workouts
+    ]
+
+    return jsonify(data)
+#------------Graphs of the pushups end---------------------

@@ -12,7 +12,7 @@
 <!--  -->
 
 <body class="bg-light">
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <a href="logout"  class="btn btn-outline-danger" role="button">Logout</a>
 <h1>All Workouts Page</h1>
 <center>
@@ -70,6 +70,52 @@
     </div>
     
 </center>
+
+<canvas id="workoutChart"></canvas>
+<script>
+fetch("/workoutChart")
+  .then(res => res.json())
+  .then(data => {
+
+    const labels = data.map(item => item.date);
+    const pushups = data.map(item => item.pushups);
+
+    const ctx = document.getElementById("workoutChart");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Pushups",
+          data: pushups,
+          borderWidth: 2,
+          fill: false,
+          tension: 0.2
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "February 2026"
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Number of Pushups"
+            },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+  });
+</script>
+
 </body>
 
 
